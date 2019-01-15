@@ -1,13 +1,14 @@
 package com.gg.graphic;
 
 import com.gg.Vector2;
+import com.gg.engine.GameLoop;
 import com.gg.engine.GameObject;
 import com.gg.engine.MainContainer;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame implements Runnable {
 
     MainContainer mainContainer = MainContainer.getInstance();
 
@@ -21,7 +22,7 @@ public class GameFrame extends JFrame {
     }
 
     @Override
-    public void paint(Graphics g){
+    public synchronized void paint(Graphics g){
         refresh(g);
         mainContainer.getGameObjects().forEach(gameObject -> draw(g, gameObject));
     }
@@ -37,5 +38,10 @@ public class GameFrame extends JFrame {
         Vector2 size = gameObject.getSize();
         g.setColor(Color.BLACK);
         graphics2D.drawRect(position.x, position.y, size.x, size.y);
+    }
+
+    @Override
+    public void run() {
+        new GameFrame();
     }
 }

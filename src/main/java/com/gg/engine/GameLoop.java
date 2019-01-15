@@ -4,27 +4,33 @@ import com.gg.Vector2;
 
 public class GameLoop implements Runnable {
 
-    private static final GameLoop instance = new GameLoop();
+    private static GameLoop instance;
+    GameObject gameObject;
 
     private GameLoop() {
     }
 
     public static GameLoop getInstance(){
+        if(instance == null) instance = new GameLoop();
         return instance;
     }
 
     @Override
     public void run() {
         new Thread(this, "GameLoop");
-        GameObject gameObject = new GameObject();
+        gameObject = new GameObject();
         gameObject.setSize(new Vector2(50,50));
         gameObject.setPosition(new Vector2(100,100));
-        for(int i = 0; i < 100; i++){
-            gameObject.move(1,1);
+        while(true){
+            move();
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+            }
         }
     }
 
-    public void start(){
-        run();
+    public void move(){
+        gameObject.move(1,1);
     }
 }
