@@ -27,6 +27,10 @@ public class GameFrame extends JFrame implements Runnable {
         mainContainer.getGameObjects().forEach(gameObject -> draw(g, gameObject));
     }
 
+    @Override
+    public void run() {
+    }
+
     private void refresh(Graphics g){
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
@@ -38,10 +42,5 @@ public class GameFrame extends JFrame implements Runnable {
         Vector2 size = gameObject.getSize();
         g.setColor(Color.BLACK);
         graphics2D.drawRect(position.x, position.y, size.x, size.y);
-    }
-
-    @Override
-    public void run() {
-        new GameFrame();
     }
 }
