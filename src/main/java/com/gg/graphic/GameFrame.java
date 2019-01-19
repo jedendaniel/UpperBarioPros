@@ -1,7 +1,6 @@
 package com.gg.graphic;
 
 import com.gg.Vector2;
-import com.gg.engine.GameLoop;
 import com.gg.engine.GameObject;
 import com.gg.engine.MainContainer;
 
@@ -10,15 +9,20 @@ import java.awt.*;
 
 public class GameFrame extends JFrame implements Runnable {
 
-    MainContainer mainContainer = MainContainer.getInstance();
+    private static GameFrame instance = new GameFrame();
+    private MainContainer mainContainer = MainContainer.getInstance();
 
-    public GameFrame() throws HeadlessException {
+    private GameFrame() throws HeadlessException {
         super("Upper Bario Pros");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setSize(500, 400);
         Timer timer = new Timer(20, arg0 -> GameFrame.this.repaint());
         timer.start();
+    }
+
+    public static GameFrame getInstance(){
+        return instance;
     }
 
     @Override
