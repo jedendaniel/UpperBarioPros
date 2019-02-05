@@ -3,6 +3,7 @@ package com.gg.graphic;
 import com.gg.Vector2;
 import com.gg.engine.GameObject;
 import com.gg.engine.MainContainer;
+import com.gg.engine.MouseInput;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +18,7 @@ public class GameFrame extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setSize(500, 400);
+        addMouseListener(new MouseInput());
         Timer timer = new Timer(20, arg0 -> GameFrame.this.repaint());
         timer.start();
     }

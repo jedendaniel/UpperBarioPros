@@ -1,6 +1,7 @@
 package com.gg;
 
 import com.gg.engine.GameLoop;
+import com.gg.engine.MainContainer;
 import com.gg.graphic.GameFrame;
 
 import java.util.concurrent.ExecutorService;
@@ -13,6 +14,7 @@ public class UpperBarioPros{
     private static Runnable gameLoop = GameLoop.getInstance();
 
     public static void main(String[] args) throws InterruptedException {
+        MainContainer.getInstance().load();
         ExecutorService service = Executors.newFixedThreadPool(2);
         service.submit(gameLoop);
         service.submit(displayModule);
